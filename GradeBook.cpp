@@ -8,33 +8,33 @@
 using namespace std;
 
 GradeBook::GradeBook() // constructor creates GradeBook object
+	:aCount(0),
+	bCount(0),
+	cCount(0),
+	dCount(0),
+	fCount(0)
 {
 	// empty body
 }
 
 GradeBook::GradeBook(string name) // constructor initializes courseName with string supplied as argument
 								  //: courseName(name) // member initializer to initialize courseName
+	:aCount(0), // initialize grade counts to 0
+	bCount(0),
+	cCount(0),
+	dCount(0),
+	fCount(0)
 {
 	setCourseName(name);
 }// end GradeBook constructor
-
- // constructor initializes GradeBook with grade counts
-GradeBook::GradeBook(unsigned int aCnt, unsigned int bCnt, unsigned int cCnt, unsigned int dCnt, unsigned int fCnt)
-{
-	aCount = aCnt;
-	bCount = bCnt;
-	cCount = cCnt;
-	dCount = dCnt;
-	fCount = fCnt;
-}
 
 void GradeBook::inputGrades()
 {
 	char grade; // grade entered by user
 
-	cout << "Enter the letter grades below. Enter the EOF character to end input." << endl;
+	cout << "Enter the letter grades below. Enter EOF character to end input." << endl;
 
-	while ((grade = cin.get()) != EOF)
+	while ((grade = cin.get()) != EOF) // EOF character is Ctrl + Z
 	{
 		switch (grade)
 		{
@@ -64,6 +64,7 @@ void GradeBook::inputGrades()
 			break;
 		default: // catch all other characters
 			cout << "Incorrect grade entered. Enter a new grade." << endl;
+			break;
 		}
 	}
 }
