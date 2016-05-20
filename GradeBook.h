@@ -1,9 +1,7 @@
-// Gradebook.h
+// GradeBook.h
 // Header file serves to define the class "GradeBook"
 // This file also defines the constructors as well as the member functions with function prototypes
 
-#include "stdafx.h"
-#include <iostream>
 #include <string>
 // using namespace std; (not supposed to include this)
 // thereby write std::cout, std::string, std::endl, etc.
@@ -25,6 +23,20 @@ public:
 
 	// function that displays a welcome message to the GradeBook user
 	void displayMessage();
+
+	// function to calculate the total score and average score of 10 students' quiz scores
+	void determineClassAverage();
+
+	// function to input the grades
+	void inputGrades();
+
+	// function to dispay grade report
+	void displayGradeReport();
 private:
 	std::string courseName; // course name for this GradeBook
+	unsigned int aCount; // count of A grades
+	unsigned int bCount; // count of B grades
+	unsigned int cCount; // count of C grades
+	unsigned int dCount; // count of D grades
+	unsigned int fCount; // count of F grades
 }; // end class GradeBook

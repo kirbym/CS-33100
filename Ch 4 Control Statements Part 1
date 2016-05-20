@@ -1,0 +1,16 @@
+// Ch 4 Control Statements Part 1.cpp
+// Continuing with classes, objects, and member functions
+
+#include "GradeBook.h"
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main()
+{
+	GradeBook myGradeBook("Class 1");
+	myGradeBook.determineClassAverage();
+
+	system("pause");
+	return 0;
+}
