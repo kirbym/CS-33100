@@ -1,3 +1,6 @@
+// Ch 4 Control Statements Part 1.cpp
+// Continuing with classes, objects, and member functions
+
 #include "GradeBook.h"
 #include <iostream>
 #include <string>
