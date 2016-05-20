@@ -15,9 +15,6 @@ public:
 	// constructor initializes courseName with string supplied as argument
 	explicit GradeBook(std::string name);
 
-	// constructor initializes gradebook with grade counts
-	explicit GradeBook(unsigned int aCnt, unsigned int bCnt, unsigned int cCnt, unsigned int dCnt, unsigned int fCnt);
-
 	// function that sets the course name
 	void setCourseName(std::string name);
 
