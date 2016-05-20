@@ -1,0 +1,27 @@
+// Ch 5 Control Statements Part 2.cpp
+// This is demonstrate more member functions using while statements and switch statements
+
+#include "GradeBook.h"
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main()
+{
+	GradeBook gradebook1;
+	string nameOfCourse;
+
+	cout << "Enter the name of the gradebook: ";
+	getline(cin, nameOfCourse);
+	gradebook1.setCourseName(nameOfCourse);
+
+	cout << endl;
+	gradebook1.displayMessage();
+
+	gradebook1.inputGrades();
+
+	gradebook1.displayGradeReport();
+
+	system("pause");
+	return 0;
+}
