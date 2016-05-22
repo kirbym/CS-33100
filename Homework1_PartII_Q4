@@ -1,0 +1,97 @@
+// PartII_Q4.cpp
+
+/*
+4.(Text Exercise 5.17) An online retailer sells five products whose retail prices are as follows:
+Product 1, $2.98
+Product 2, $4.50
+Product 3, $9.98
+Product 4, $4.49
+Product 5, $6.87
+Write an application that reads a series of pairs of numbers as follows:
+a)product number, and
+b)quantity sold.
+Your program should use a switch statement to determine the retail price for each product.
+It should calculate and display the total retail value of all products sold.
+Use a sentinel-controlled loop to determine when the program should stop looping and display
+the final results.
+*/
+
+//This program will calculate and display the total sales of a collection of products. The user will input the product number
+//and the quantity. The sale of the product will be calculated from the quantity entered and the predetermined price.
+//The total retail value will be calculated by adding all the individual sales.
+
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+int main()
+{
+	int productNumber = 0; //product number (1-5) to be chosen by user
+	int quantity;  //amount of the chosen product sold
+	double sale;  //the monetary value of the chosen product that was sold
+	double total = 0;  //accumulator for all sales that take place
+	const double PRODUCT_1_PRICE = 2.98;  //the price of product 1
+	const double PRODUCT_2_PRICE = 4.5;  //price of product 2
+	const double PRODUCT_3_PRICE = 9.98; //price of product 3
+	const double PRODUCT_4_PRICE = 4.49;  //price of product 4
+	const double PRODUCT_5_PRICE = 6.87;  //price of product 5
+
+	//prompt user for the product number or give option to quit the program
+	cout << "Enter a product number from 1 to 5 (or -1 to quit): ";
+	cin >> productNumber;
+	while (productNumber < -1 || productNumber == 0 || productNumber > 5) //validate the product number
+	{
+		cout << "Invalid product number.";
+		cout << "\n\nEnter a product number from 1 to 5 (or -1 to quit): ";
+		cin >> productNumber;
+	}
+
+	while (productNumber != -1)
+	{
+		//prompt the user for the quantity of the product sold
+		cout << "Enter the quantity of the product sold: ";
+		cin >> quantity;
+		while (quantity < 0)  //validate the quantity
+		{
+			cout << "Invalid quantity.";
+			cout << "\n\nEnter the quantity of the product sold: ";
+			cin >> quantity;
+		}
+
+		switch (productNumber) //match product price with product number and calculate the sale
+		{
+		case 1:
+			sale = quantity * PRODUCT_1_PRICE;
+			break;
+		case 2:
+			sale = quantity * PRODUCT_2_PRICE;
+			break;
+		case 3:
+			sale = quantity * PRODUCT_3_PRICE;
+			break;
+		case 4:
+			sale = quantity * PRODUCT_4_PRICE;
+			break;
+		case 5:
+			sale = quantity * PRODUCT_5_PRICE;
+			break;
+		}
+
+		total += sale; //after calculating the sale, add to the total monetary value of the sales
+
+		//prompt user for the next product number or give option to quit entering product details
+		cout << "\nEnter a product number from 1 to 5 (or -1 to quit): ";
+		cin >> productNumber;
+		while (productNumber < -1 || productNumber == 0 || productNumber > 5)
+		{
+			cout << "Invalid product number.";
+			cout << "\n\nEnter a product number from 1 to 5 (or -1 to quit): ";
+			cin >> productNumber;
+		}
+	}///////////////end of sentinel while loop
+
+	//display the final total of all sales across all products
+	cout << "\nThe total retail value of all products sold is $" << fixed << setprecision(2) << total << endl;
+
+	return 0;
+}
