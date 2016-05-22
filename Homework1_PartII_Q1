@@ -1,0 +1,72 @@
+// PartII_Q1.cpp
+
+/*
+1. (Text Exercise 2.28) Write a program that inputs a five-digit integer, separates the integer into 
+its digits and prints them separated by three space each. [Hint: Use the integer division and 
+remainder operators.] 
+For example, if the user types in 42339, the program should print: 4   2   3   3   9
+*/
+
+//This program takes a five digit integer input from the user and separates the integer into its five digits.
+//Using integer division, the digit for each place (ones place, tens place, etc.) will be found.
+//Using the modulus operator, the five digit integer will be broken down into a four digit integer whereby
+//the next digit will be found with integer division. Repeat to break four digit integer into three, etc.
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	int fiveDigitInt; //five digit integer to start with
+	int fourDigitInt;  //four digit integer
+	int threeDigitInt;  //three digit integer
+	int twoDigitInt;  //two digit integer
+	int oneDigitInt;  //one digit integer
+	
+	int onesPlace;  //ones place of the five digit integer
+	int tensPlace;  //tens place of the five digit integer
+	int hundredsPlace;  //hundreds place of the five digit integer
+	int thousandsPlace;  //thousands place of the five digit integer
+	int tenThousandsPlace;  //ten thousands place of the five digit integer
+
+	const int TEN = 10;  //constant 10
+	const int HUNDRED = 100;  //constant 100
+	const int THOUSAND = 1000;  //constant 1,000
+	const int TEN_THOUSAND = 10000;  //constand 10,000
+
+	//prompt user for the five digit integer
+	cout << "Enter a five digit integer: ";
+	cin >> fiveDigitInt;
+	while (fiveDigitInt < 10000 || fiveDigitInt > 99999) //validate that the user entered a five digit integer
+	{
+		cout << "\nIncorrect value.";
+		cout << "\nEnter a five digit integer: ";
+		cin >> fiveDigitInt;
+	}
+	
+	cout << "\nSeparating integer . . ." << endl << endl;
+
+	tenThousandsPlace = fiveDigitInt / TEN_THOUSAND; //divide the five digit integer by 10,000 to find the number in the ten thousands place
+	fourDigitInt = fiveDigitInt % TEN_THOUSAND;  //the remainder when dividing the five digit integer by 10,000 gives a four
+	                                             //digit integer with the remaining four digits from the five digit integer
+
+	thousandsPlace = fourDigitInt / THOUSAND; //divide the four digit integer by 1,000 to find the number in the thousands place
+	threeDigitInt = fourDigitInt % THOUSAND; //the remainder when dividing the four digit integer by 1,000 gives a three
+											 //digit integer with the remaining three digits from the four digit integer
+
+	hundredsPlace = threeDigitInt / HUNDRED; //divide the three digit integer by 100 to find the number in the hundreds place
+	twoDigitInt = threeDigitInt % HUNDRED;  //the remainder when dividing the three digit integer by 100 gives a two
+											//digit integer with the remaining two digits from the three digit integer
+
+	tensPlace = twoDigitInt / TEN;  //divide the two digit integer by 10 to find the number in the tens place
+	oneDigitInt = twoDigitInt % TEN;  //the remainder when dividing the two digit integer by 10 gives a one
+									  //digit integer with the remaining digit from the two digit integer
+
+	onesPlace = oneDigitInt;   //a one digit integer is all that remains, so that must be the ones place
+
+	//display each digit of the integer separated by three spaces
+	cout << tenThousandsPlace << "   " << thousandsPlace << "   " << hundredsPlace << "   "
+		<< tensPlace << "   " << onesPlace << endl;
+
+	return 0;
+}
