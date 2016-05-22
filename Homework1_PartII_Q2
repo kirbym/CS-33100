@@ -1,0 +1,129 @@
+// PartII_Q2.cpp
+
+/*
+2.(Text Exercise 3.10) Create a class called Invoice that a hardware store might use to represent an invoice
+for an item sold at the sore. An Invoice should include four data members–a part number (type string), a part description
+(type string), a quantity of the item being purchased (type int) and a price per item (type int).
+Your class should have a constructor that initializes the four data members. Provide a set and a get
+function for each data member. In addition, provide a member function named getInoviceAmount
+that calculates the invoice amount (i.e., multiples the quantity by the price per item), then returns the amounts as an
+int value. If the quantity is not positive, it should be set to 0. If the price per item is not positive, it should be set to 0.
+
+Write a test C++ program that demonstrates class Invoice’s capabilities.
+*/
+
+//This program will display the summary of an invoice for a part at, for example, a hardware store.
+//The user will input the necessary details in order for an invoice to be created.
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Invoice //'Invoice' class definition
+{
+public:
+	explicit Invoice(string partNum, string partDes, int amount, int price) //constructor
+		:partNumber{ partNum }, //initialize the part number with input from user
+		partDescription{ partDes } //initialize the part description with input from user
+	{
+		setQuantity(amount); //initialize quantity with input from user
+		setPricePerItem(price);  //initialize price with input from user
+	}
+
+	void setPartNumber(string partNum) //function to set the ID of the part
+	{
+		partNumber = partNum;
+	}
+
+	void setPartDescription(string partDes) //function to set the description of the part
+	{
+		partDescription = partDes;
+	}
+
+	void setQuantity(int amount) //function to set the quantity for the part
+	{
+		if (amount >= 0) //check that the quantity is a legitimate value
+			quantity = amount;
+		else
+			quantity = 0; //if amount given by user is < 0, set quantity to 0
+	}
+
+	void setPricePerItem(int price) //function to set the price of the part
+	{
+		if (price >= 0) //check that the price is above 0
+			pricePerItem = price;
+		else
+			pricePerItem = 0; //if price given by user is < 0, set price to 0
+	}
+
+	string getPartNumber() //function to get the part number for the invoice
+	{
+		return partNumber;
+	}
+
+	string getPartDescription() //function to get the part description for the invoice
+	{
+		return partDescription;
+	}
+
+	int getQuantity() //function to get the quantity of the part
+	{
+		return quantity;
+	}
+
+	int getPricePerItem() //function to get the price for the part
+	{
+		return pricePerItem;
+	}
+
+	int getInvoiceAmount() //function to get the invoice amount (total price of invoice)
+	{
+		return quantity * pricePerItem;
+	}
+
+private:
+	string partNumber; //identification number for the part
+	string partDescription; //description of the part
+	int quantity;  //amount of part available
+	int pricePerItem;  //price to charge for each part
+};
+////////////////////////end of 'Invoice' class definition
+
+int main()
+{
+	string partNumber;  //identification number for the part
+	string partDescription; //description of the part
+	int quantity;  //amount of part available
+	int pricePerItem;  //price to charge for each part
+
+	cout << "This program will generate an invoice for you." << endl;
+
+	//ask user for the part number
+	cout << "\nEnter the part number: ";
+	getline(cin, partNumber);
+
+	//ask user for a description of the part
+	cout << "\nEnter the part description: ";
+	getline(cin, partDescription);
+
+	//ask user for the quantity of the part
+	cout << "\nEnter the quantity of the part: ";
+	cin >> quantity;
+
+	//ask user for the price for each part
+	cout << "\nEnter the price for each item: $";
+	cin >> pricePerItem;
+
+	Invoice invoice1(partNumber, partDescription, quantity, pricePerItem); //create invoice object
+	//initialized with user chosen values
+
+	//display the summary of the invoice using the member functions
+	cout << "\nThe current invoice is as follows";
+	cout << "\nPart Number: " << invoice1.getPartNumber();
+	cout << "\nPart Description: " << invoice1.getPartDescription();
+	cout << "\nQuantity: " << invoice1.getQuantity();
+	cout << "\nPrice Per Item: $" << invoice1.getPricePerItem();
+	cout << "\nTotal Amount: $" << invoice1.getInvoiceAmount() << endl;
+
+	return 0;
+}

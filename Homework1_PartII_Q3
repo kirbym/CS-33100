@@ -1,0 +1,82 @@
+// PartII_Q3.cpp
+
+/*
+3.(Text Exercise 4.14) Develop a C++ program that will determine whether a department-store
+customer has exceeded the credit limit on a charge account. For each customer, the following facts are available:
+a) Account number (an integer)
+b) Balance at the beginning of the month
+c) Total of all items charged by this customer this month
+d) Total of all credits applied to this customer’s account this month
+e) Allowed credit limit
+The program should use a while statement to input each of these facts, calculate the new
+balance (=beginning balance + charges – credits), and determine whether the new balance
+exceeds the customer’s credit limit. For those customers whose credit limit is exceeded,
+the program should display the customer’s account number, credit limit, new balance and the
+message “Credit Limit Exceeded.”
+*/
+
+//This program will ask the user to enter account credentials and will calculate the current balance on the account.
+//If the account has exceeded its own credit limit, a message will be displayed.
+
+#include <iostream>
+#include <iomanip> //manipulating the output of numbers
+using namespace std;
+
+int main()
+{
+	int accountNumber = 0; //account number input by user
+	double initialBalance;  //initial balance of the account input by user
+	double charges; //charges on the account input by user
+	double credits;  //credits on the account input by user
+	double creditLimit;  //credit limit for the account
+
+	//promtp the user for the account number or give option to quit program
+	cout << "Enter account number (or -1 to quit): ";
+	cin >> accountNumber;
+	while (accountNumber < -1 || accountNumber == 0) //validate that the user chose an appropriate account number
+	{
+		cout << "Invalid account number.";
+		cout << "\n\nEnter account number (or -1 to quit): ";
+		cin >> accountNumber;
+	}
+
+	while (accountNumber != -1)
+	{
+		//prompt and ask for the initial balance, charges, credits, and credit limit, respectively
+		cout << "Enter beginning balance: ";
+		cin >> initialBalance;
+		cout << "Enter total charges: ";
+		cin >> charges;
+		cout << "Enter total credits: ";
+		cin >> credits;
+		cout << "Enter credit limit: ";
+		cin >> creditLimit;
+
+		double currentBalance = initialBalance + charges - credits; //calculate current balance on the account
+
+		//diplay the current balance on the account after charges and credits are applied
+		cout << fixed << setprecision(2);
+		cout << "New balance is " << currentBalance;
+
+		if (currentBalance > creditLimit)
+		{   //let user know that the credit limit has been reached
+			cout << "\nAccount:       " << accountNumber;
+			cout << "\nCredit Limit:  " << creditLimit;
+			cout << "\nBalance:       " << currentBalance;
+			cout << "\nCredit Limit Exceeded.";
+		}
+		cout << endl << endl;
+
+		//promtp user for the next account number or give the option to exit
+		cout << "Enter account number (or -1 to quit): ";
+		cin >> accountNumber;
+		while (accountNumber < -1 || accountNumber == 0) //validate the account number is an appropriate value
+		{
+			cout << "Invalid account number.";
+			cout << "\n\nEnter account number (or -1 to quit): ";
+			cin >> accountNumber;
+		}
+	} /////////end of sentinel while loop
+
+	return 0;
+}
