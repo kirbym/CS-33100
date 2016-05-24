@@ -121,7 +121,20 @@ void GradeBook::determineClassAverage() // function to calculate the total score
 
 	int averageScore = totalScore / gradeCount; // average score of 10 students
 
-	// display results
+												// display results
 	cout << "Total score = " << totalScore << endl;
 	cout << "Average score = " << averageScore << endl;
+}
+
+int GradeBook::maximum(int x, int y, int z) //determine the maximum grade from 3 input grades
+{
+	int maximumValue = x;  //assume the first grade is the maximum
+	
+	if (y > maximumValue)
+		maximumValue = y;  //if the second grade is greater than the maximum, grade 2 becomes new maximum
+
+	if (z > maximumValue) 
+		maximumValue = z;  //if the third grade is greater than the maximum, grade 3 becomes new maximum
+
+	return maximumValue;  //return maximum grade
 }
