@@ -32,6 +32,10 @@ public:
 
 	// function to dispay grade report
 	void displayGradeReport();
+
+	// determine the maximum of 3 entered grades
+	int maximum(int, int, int);
+
 private:
 	std::string courseName; // course name for this GradeBook
 	unsigned int aCount; // count of A grades
@@ -39,4 +43,5 @@ private:
 	unsigned int cCount; // count of C grades
 	unsigned int dCount; // count of D grades
 	unsigned int fCount; // count of F grades
+	int maximumGrade; // maximum grade determined by maximum function
 }; // end class GradeBook
