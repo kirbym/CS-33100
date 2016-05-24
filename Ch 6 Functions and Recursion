@@ -1,0 +1,122 @@
+// Ch 6 Functions and Recursion.cpp
+
+#include "GradeBook.h"
+#include <iostream>
+#include <cstdlib> //contains prototypes for functions such as srand() and rand()
+#include <ctime> //contains prototypes for function time()
+using namespace std;
+
+
+int main()
+{
+	GradeBook myGradeBook;  //create a GradeBook object
+	int score1;  //the first score
+	int score2;  //the second score
+	int score3;  //the third score
+
+	//promtp user for three integer scores
+	cout << "Enter three integer grades (separated by a space): ";
+	cin >> score1 >> score2 >> score3;
+
+	int currentMaxScore = myGradeBook.maximum(score1, score2, score3); //find maximum score with GradeBook maximum member function
+
+	//display result
+	cout << "The current max score is " << currentMaxScore << endl;
+
+	return 0;
+}
+
+
+/***********************************************************************************************************
+//This is a simulation of the game of Craps
+
+unsigned int rollDice(); //function prototype
+
+int main()
+{
+	srand(static_cast<unsigned int>(time(0))); //seeding the random number generator with computer time
+
+	enum Status { CONTINUE, WON, LOST }; //enumerated data type containing the status of the game
+
+	unsigned int myPoint;  //the player's point if game proceeds past first dice roll
+	Status gameStatus = CONTINUE;  //initial status of the game
+	unsigned int sumOfDice = rollDice();  //sum of the dice roll
+
+	switch (sumOfDice)
+	{
+	case 7:
+	case 11:  //if player rolls 7 or 11 on first roll, player instantly wins
+		gameStatus = WON;
+		break;
+	case 2:
+	case 3:   //if player rolls 2, 3, or 12 on first roll, player instantly loses
+	case 12:
+		gameStatus = LOST;
+		break;
+	default:   //otherwise game continues
+		gameStatus = CONTINUE;
+		myPoint = sumOfDice;  //first dice roll becomes player's roll
+		cout << "Point is " << myPoint << endl;
+	}
+
+	while (gameStatus == CONTINUE) //continue the game
+	{
+		sumOfDice = rollDice();
+
+		if (sumOfDice == myPoint) //if player rolls dice and the sum is equal to the player's point, then player has won
+			gameStatus = WON;
+		else if (sumOfDice == 7)  //if player instead rolls a 7 before reaching the player's point, then player has lost
+			gameStatus = LOST;
+	}
+
+	if (gameStatus == WON)  //display win or loss message
+		cout << "Player wins!" << endl;
+	else
+		cout << "Player loses." << endl;
+
+	return 0;
+}
+
+unsigned int rollDice()  //function to roll two dice and sum the resulting numbers
+{
+	const int MAX = 6;  //upper bound for the die
+	const int MIN = 1;  //lower bound for the die
+	unsigned int die1 = (rand() % (MAX - MIN + 1)) + MIN;  //"roll" the die
+	unsigned int die2 = (rand() % (MAX - MIN + 1)) + MIN; //"roll" the die
+	unsigned int sum = die1 + die2;   //sum of the two faces
+
+	//display what the player has rolled
+	cout << "Player rolled " << die1 << " + " << die2 << " = " << sum << endl;
+
+	return sum;
+}
+********************************************************************************************************/
+
+/*******************************************************************************************************
+//This is a reminder of how pass by reference works
+
+void pass_by_reference(double &, double &, double &);
+
+int main()
+{
+	double a, b, c;
+
+	cout << "Give three values: ";
+	cin >> a >> b >> c;
+
+	for (unsigned i = 0; i < 10; i++)
+	{
+		pass_by_reference(a, b, c);
+		cout << "a = " << a << "  b = " << b << "  c = " << c << endl;
+	}
+
+	return 0;
+}
+
+void pass_by_reference(double &x, double &y, double &z)
+{
+	x += x;
+	y -= 8;
+	z *= 3;
+}
+********************************************************************************************************/
