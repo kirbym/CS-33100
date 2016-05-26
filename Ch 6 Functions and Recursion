@@ -1,31 +1,91 @@
 // Ch 6 Functions and Recursion.cpp
 
 #include "GradeBook.h"
+#include "Maximum.h"
 #include <iostream>
+#include <iomanip>
 #include <cstdlib> //contains prototypes for functions such as srand() and rand()
 #include <ctime> //contains prototypes for function time()
 using namespace std;
 
 
+/************************************************************************************************************
+//Recursive fibonacci function
+
+unsigned long fibonacci(unsigned long); //function prototype
+
 int main()
 {
-	GradeBook myGradeBook;  //create a GradeBook object
-	int score1;  //the first score
-	int score2;  //the second score
-	int score3;  //the third score
+	for (int i = 0; i <= 25; i++) //show all fibonacci numbers up to the 25th
+	{
+		cout << "Fibonacci(" << i << ") = " << fibonacci(i) << endl;
+	}
+}
 
-	//promtp user for three integer scores
-	cout << "Enter three integer grades (separated by a space): ";
-	cin >> score1 >> score2 >> score3;
+unsigned long fibonacci(unsigned long number) //function to determine fibonacci series numbers
+{
+	if (0 == number || 1 == number) //base cases
+		return number;
+	else //recursion step
+		return fibonacci(number - 1) + fibonacci(number - 2); //repeatedly call fibonacci to add up all previous numbers
+}
+************************************************************************************************************/
 
-	int currentMaxScore = myGradeBook.maximum(score1, score2, score3); //find maximum score with GradeBook maximum member function
 
-	//display result
-	cout << "The current max score is " << currentMaxScore << endl;
+/************************************************************************************************************
+//Recursive factoral function
 
+unsigned long factorial(unsigned long); //function prototype
+
+int main()
+{
+	for (int i = 0; i <= 20; ++i)
+	{
+		cout << i << "! = " << factorial(i) << endl;
+	}
 	return 0;
 }
 
+unsigned long factorial(unsigned long number) //function to calculate the factorial of a number
+{
+	if (number <= 1) //base cases: 0! = 1 and 1! = 1
+		return 1;
+	else   //recursion step
+		return number * factorial(number - 1); //repeatedly call factorial function until number = 1
+}
+************************************************************************************************************/
+
+
+/************************************************************************************************************
+//Demonstrating the use of template functions allowing different data types to be sent to the same function
+int main()
+{
+	int int1, int2, int3;
+	double double1, double2, double3;
+	char char1, char2, char3;
+
+	cout << "Input 3 integers: ";
+	cin >> int1 >> int2 >> int3;
+	int intMax = maximum(int1, int2, int3);
+	cout << "\nThe maximum of the 3 integers is " << intMax;
+
+	cout << "\n\nInput 3 doubles: ";
+	cin >> double1 >> double2 >> double3;
+	double doubleMax = maximum(double1, double2, double3);
+	cout << "\nThe maximum of the 3 doubles is " << doubleMax;
+
+	cout << "\n\nInput 3 characters: ";
+	cin >> char1 >> char2 >> char3;
+	char charMax = maximum(char1, char2, char3);
+	cout << "\nThe maximum of the 3 characters is " << charMax;
+
+	cout << "\n\nThe minimum of the 3 maximums is ";
+	minimum(intMax, doubleMax, charMax);
+	cout << endl;
+
+	return 0;
+}
+************************************************************************************************************/
 
 /***********************************************************************************************************
 //This is a simulation of the game of Craps

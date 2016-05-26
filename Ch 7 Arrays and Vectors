@@ -1,0 +1,18 @@
+// Ch 7 Arrays and Vectors.cpp
+
+#include <iostream>
+#include <iomanip>
+#include "GradeBook.h"
+using namespace std;
+
+int main()
+{
+	const array< int, GradeBook::students > grades = { 28, 63, 94, 100, 83, 78, 34, 91, 67, 48 };
+	string courseName = "CS 33100 Intro to C++ and Oop";
+
+	GradeBook myGradeBook(courseName, grades);
+	myGradeBook.displayMessage();
+	myGradeBook.processGrades();
+
+	return 0;
+}
