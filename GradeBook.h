@@ -8,7 +8,7 @@
 class GradeBook // class definition
 {
 public:
-	static const size_t students = 10; //constant -- number of students who took the test
+	static const size_t students = 10; //constant -- number of students who took the test, public data member
 		
 	GradeBook(const std::string &, const std::array<int, students > &); //constructor initializes course name and array of grades
 	

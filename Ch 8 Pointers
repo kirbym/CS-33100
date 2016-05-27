@@ -1,0 +1,32 @@
+// Ch 8 Pointers.cpp
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	long value1 = 200000;
+	long value2 = 0;
+
+	long *longPtr = nullptr; //1
+
+	longPtr = &value1;  //2
+
+	cout << "value of value1 " << value1 << endl;
+	cout << "address of value1 " << &value1 << endl;
+	cout << "value of value2 " << value2 << endl;
+	cout << "address of value2 " << &value2 << endl;
+	cout << "longPtr = " << longPtr << endl;
+	cout << "*longPtr = " << *longPtr << endl;
+
+	value2 = *longPtr;  //3
+
+	cout << "\n\n";
+	cout << "value of value1 " << value1 << endl;
+	cout << "address of value1 " << &value1 << endl; //5
+	cout << "value of value2 " << value2 << endl; //4
+	cout << "address of value2 " << &value2 << endl;
+	cout << "longPtr = " << longPtr << endl; //6
+	cout << "*longPtr = " << *longPtr << endl;
+	return 0;
+}
