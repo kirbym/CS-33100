@@ -1,0 +1,17 @@
+// HW2Prj.cpp
+
+#include "Zipcode.h"
+#include <iostream>
+#include <iomanip>
+#include <array>
+using namespace std;
+
+int main()
+{
+	Zipcode zipcodes;
+	zipcodes.readZipcode();
+
+	zipcodes.printBarcode();
+
+	return 0;
+}
