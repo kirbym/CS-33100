@@ -1,0 +1,74 @@
+// PartII_Q1.cpp
+
+/*
+Write a program for the following duplicate elimination. Begin with an empty vector.
+Read in 10 numbers, each of which is between 10 and 100, inclusive. As each number is read, validate
+it and store it in the vector only if it isn’t a duplicate of a number already read.
+(Note: use the push_back function of vector to add each unique value to the vector.)
+After reading all the values, display only the unique values that the user entered.
+*/
+
+//This program will ask the user for 10 numbers between 10 and 100. Upon entering each number, the program will
+//validate that the number is range and append the number to a vector iff the number does not already appear
+//in the vector. This will create a vector that has only unique values between 10 and 100. After input, the
+//program will display the vector of unique values.
+
+#include <iostream>
+#include <vector> //needed for vectors
+#include <algorithm> //needed for sort and searching
+using namespace std;
+
+int main()
+{
+	vector<int> uniqueVector; //empty vector
+
+	int number; //number to be input by user
+	const int LOWER_BOUND = 10; //lower bound for input
+	const int UPPER_BOUND = 100; //upper bound for input
+	const int QUANTITY = 10; //amount of numbers input by user
+
+	//prompt user for first number of the set
+	cout << "Enter " << QUANTITY << " numbers between " << LOWER_BOUND << " and " << UPPER_BOUND << "." << endl;
+	cout << "First number? ";
+	cin >> number;
+	while (number < LOWER_BOUND || number > UPPER_BOUND) //validate that the number is between the lower and upper bounds
+	{
+		cout << "Please enter a number between " << LOWER_BOUND << " and " << UPPER_BOUND << ".";
+		cout << "\nFirst number? ";
+		cin >> number;
+	}
+
+	uniqueVector.push_back(number); //append the number to uniqueVector
+
+	for (int index = 1; index < QUANTITY; index++) //loop to gain the next numbers
+	{
+		cout << "Next number? ";
+		cin >> number;
+		while (number < LOWER_BOUND || number > UPPER_BOUND) //validate that the number is between lower and upper bounds
+		{
+			cout << "Enter a number between " << LOWER_BOUND << " and " << UPPER_BOUND << ".";
+			cout << "\nNumber? ";
+			cin >> number;
+		}
+
+		sort(uniqueVector.begin(), uniqueVector.end()); //sort the vector in ascending order; needed for binary_search
+
+		bool uniqueValue = binary_search(uniqueVector.begin(), uniqueVector.end(), number); //search the vector for the input number
+		//note: binary_search returns 'true' if the value is found, returns 'false' if value is not found
+
+		if (uniqueValue == false) //if the number was not found in the vector, then number is unique to the vector
+			uniqueVector.push_back(number); //append the number to the vector
+	}
+
+	//after entering and checking the input numbers, display the vector of unique values
+	cout << "The unique value(s) are\n";
+	sort(uniqueVector.begin(), uniqueVector.end());
+
+	for (auto element : uniqueVector) //iterate through and diplay each element of the vector
+	{
+		cout << element << " ";
+	}
+	cout << endl;
+
+	return 0;
+}
