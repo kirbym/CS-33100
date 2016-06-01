@@ -8,10 +8,15 @@ using namespace std;
 
 int main()
 {
-	Zipcode zipcodes;
-	zipcodes.readZipcode();
+	const int NUM_DATA = 5;  //number of zipcodes to be entered and barcodes to be generated
+	int zipcodeData[NUM_DATA];  //array made the size of the number of zipcodes to hold the zipcodes
+	int correctionDigitData[NUM_DATA];  //array made the size of the number of zipcodes to hold correction digits
 
-	zipcodes.printBarcode();
+	Zipcode zipcodes(NUM_DATA, zipcodeData, correctionDigitData);  //create and initialize Zipcode object
+
+	zipcodes.readZipcode();  //read in zipcodes input by user
+
+	zipcodes.printBarcode();  //print the zipcodes, correction digits, and barcodes of the zipcodes
 
 	return 0;
 }

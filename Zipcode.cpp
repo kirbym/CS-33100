@@ -6,22 +6,24 @@
 #include <iomanip>
 using namespace std;
 
-Zipcode::Zipcode() //constructor
-{} //use constructor to initialize data members
-//numZipcode(5),
-// *? zipcode[numZipcode],
-// *? correctionDigit[numZipcode]
+Zipcode::Zipcode(int number, int zipArray[], int corArray[]) //constructor
+	:numZipcode{ number },  //initialize numZipcode
+	zipcode{ zipArray },   //initialize zipcode array; contain the input zipcodes
+	correctionDigit{ corArray }  //initialize correctionDigit array; contain correction digits of corresponding zipcode
+{	
+}
 
-void Zipcode::readZipcode() //read in 5 zipcodes
+Zipcode::~Zipcode()  //destructor
 {
-	const int numZipcode = 5;  //number of zipcodes to be entered
-	int zipcode[numZipcode];  //array to contain the input zipcodes
+}
 
+void Zipcode::readZipcode() //read in a number of zipcodes
+{
 	int inputZipcode = 0;  //zipcode input by user
 
-	cout << "Input 5 zipcodes to create barcodes." << endl; //prompt user to input zipcodes
+	cout << "Input " << numZipcode << " zipcodes to create barcodes." << endl; //prompt user to input zipcodes
 
-	for (int count = 0; count < numZipcode; count++)
+	for (size_t count = 0; count < numZipcode; count++)
 	{
 		cout << "Zipcode: ";
 		cin >> inputZipcode;  //have user enter a zipcode
@@ -37,18 +39,18 @@ void Zipcode::readZipcode() //read in 5 zipcodes
 
 void Zipcode::correctionDigitOf(int index)
 {
-	const int NUM_CORR_DIGITS = 5;  //number of correction digits to be calculated
-	int correctionDigit[NUM_CORR_DIGITS];  //array to contain the correction digits of each corresponding zipcode
-
 	unsigned accumulator = 0;  //accumulator to sum up all digits of the zipcode
 
-	for (unsigned digitSelection = 1; digitSelection <= NUM_CORR_DIGITS; digitSelection++)
+	for (size_t digitSelection = 1; digitSelection <= numZipcode; digitSelection++)
 	{ //use extract member function to select the digit of the chosen zipcode and add digit to accumulator
 		accumulator += extract(index, digitSelection);   //sum of all digits in the zipcode
 	}
-
-	correctionDigit[index] = (((accumulator / 10) + 1) * 10) - accumulator; //formula to find correction digit of corresponding zipcode
-	                           //integer division
+	
+	if (accumulator % 10 == 0) //if accumulator is a multiple of 10, correction digit is 0
+		correctionDigit[index] = 0;
+	else
+		correctionDigit[index] = (((accumulator / 10) + 1) * 10) - accumulator; //formula to find correction digit of corresponding zipcode
+							//integer division ^
 }
 
 int Zipcode::extract(int index, int location)
@@ -85,23 +87,22 @@ int Zipcode::extract(int index, int location)
 
 void Zipcode::printBarcode()
 {
-	for (int k = 0; k < 5; k++)
+	for (size_t zipSelection = 0; zipSelection < numZipcode; zipSelection++)
 	{
-		correctionDigitOf(k);  //find each correction digit of the zipcodes
+		correctionDigitOf(zipSelection);  //find each correction digit of the zipcodes
 	}
 	
-	//display template
+	//display zipcodes, correction digits, and encoded barcodes
 	cout << endl << endl;
 	cout << "Zipcode" << setw(15) << "Correction" << setw(12) << "Barcode" << endl;
 	cout << setw(20) << "Digit" << endl;
-	cout << setw(6) << "00000" << setw(12) << "0" << setw(36) << "|:|:|:|:|:|:|:|:|:|:|:|:|:|" << endl;
 	
-	//for (size_t count = 0; count < 5; count++)
-	//{
-	//	cout << setw(6) << zipcode[count] << setw(12) << correctionDigit[count] << setw(36);
-	//	displayBarcode(count);
-	//	cout << endl;
-	//}
+	for (size_t count = 0; count < numZipcode; count++)
+	{
+		cout << setw(6) << zipcode[count] << setw(12) << correctionDigit[count] << setw(10);
+		displayBarcode(count);
+		cout << endl;
+	}
 }
 
 void Zipcode::displayBarcode(int index)
@@ -110,9 +111,9 @@ void Zipcode::displayBarcode(int index)
 
 	cout << "|";  //full-height bar on left side
 
-	for (int i = 0; i < 5; i++)
+	for (size_t digitSelection = 1; digitSelection <= 5; digitSelection++)
 	{
-		digitDisplay = extract(index, i); //extract individual digits from zipcode
+		digitDisplay = extract(index, digitSelection); //extract individual digits from zipcode
 		displayCode(digitDisplay); //display the barcode corresponding to the digit
 	}
 
@@ -152,6 +153,5 @@ void Zipcode::displayCode(int digit)
 		break;
 	case 9:
 		cout << "|:|::";  //9
-		break;
 	}
 }

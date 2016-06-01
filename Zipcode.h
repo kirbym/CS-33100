@@ -3,10 +3,10 @@
 class Zipcode //class definition
 {
 public:
-	Zipcode();  //constructor
-	//destructor?
+	Zipcode(int number, int zipArray[], int corArray[]);  //constructor; takes number of zipcodes, zipcode array, and correction digit array
+	~Zipcode();  //destructor
 
-	void readZipcode(); //read 5 zipcodes and store in 'zipcode' array
+	void readZipcode(); //read zipcodes and store in 'zipcode' array
 	void correctionDigitOf(int index); //compute correction digit and store in corresponding
 	//location of 'correctionDigit' array
 
@@ -15,8 +15,8 @@ public:
 	//the individual digit of a zipcode
 
 	void printBarcode(); //display zipcodes, correction digits, and barcodes
-	void displayBarcode(int index); //display entire barcode line
-	void displayCode(int digit); //display single digit encoded in barcode format; 0 --> "||:::"
+	void displayBarcode(int index); //display entire barcode line for single zipcode
+	void displayCode(int digit); //display single digit encoded in barcode format; 0 --> "||:::", etc.
 
 private:
 	int numZipcode;   //total number of zip codes
