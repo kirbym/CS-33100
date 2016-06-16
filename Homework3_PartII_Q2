@@ -1,0 +1,53 @@
+// PartII_Q2.cpp
+
+//This program will determine the size, in bytes, of fundamental data types and write the information to a file, "datasize.dat".
+
+#include <iostream>
+#include <iomanip>
+#include <fstream>
+using namespace std;
+
+int main()
+{
+	//fundamental data types
+	char c;
+	unsigned char uc;
+	short int si;
+	unsigned short int usi;
+	int i;
+	unsigned int ui;
+	long int li;
+	unsigned long int uli;
+	float f;
+	double d;
+	long double ld;
+
+	ofstream outDataFile("datasize.dat", ios::out);  //open the file
+
+	if (!outDataFile)  //check if file was opened properly
+	{
+		cerr << "File could not be opened" << endl;
+		exit(EXIT_FAILURE);
+	}
+
+	//display how many bytes make up each data type with sizeof operator, write info to the file
+	outDataFile << "Data Type" << setw(18) << "Bytes" << endl;
+	outDataFile << "---------" << setw(18) << "-----" << endl;
+	outDataFile << "char" << setw(19) << sizeof c << endl;
+	outDataFile << "unsigned char" << setw(10) << sizeof uc << endl;
+	outDataFile << "short int" << setw(14) << sizeof si << endl;
+	outDataFile << "unsigned short int" << setw(5) << sizeof usi << endl;
+	outDataFile << "int" << setw(20) << sizeof i << endl;
+	outDataFile << "unsigned int" << setw(11) << sizeof ui << endl;
+	outDataFile << "long int" << setw(15) << sizeof li << endl;
+	outDataFile << "unsigned long int" << setw(6) << sizeof uli << endl;
+	outDataFile << "float" << setw(18) << sizeof f << endl;
+	outDataFile << "double" << setw(17) << sizeof d << endl;
+	outDataFile << "long double" << setw(12) << sizeof ld << endl;
+
+	outDataFile.close();   //explicitly close the file
+
+	system("pause");
+
+	return 0;
+}
