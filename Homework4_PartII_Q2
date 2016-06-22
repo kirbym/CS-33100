@@ -1,0 +1,88 @@
+// CS331, HW4, PartII, Q2
+// This program uses a template function to ``accumulate'' 
+// the sum of all entries of a vector.
+// Students need to complete this program. 
+ 
+
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+/********************************************
+ *     A template function                  *
+ * Accumulates by adding or concatenating   *
+ * all elements of the vector v.            *
+ ********************************************/
+
+template <typename T>
+T accum(vector <T> v)    //template function to add 3 numbers from a vector or combine 3 strings from a vector
+{
+	T accumulator = v[0];  //initialize accumulator with the first element of the vector
+
+	for (int i = 1; i < v.size(); i++)
+	{
+		accumulator += v[i];   //add the remaining 2 numbers to the total / concatenate remaining 2 strings with the first string 
+	}
+
+	return accumulator;  //return the final result
+}
+
+int main()
+{
+	// Get numeric types from the user
+	vector <int> integers{};  //empty vector of integers
+	int myInt;  //an integer input by user
+	
+	cout << "Enter 3 integers:" << endl;
+
+	for (size_t i = 0; i < 3; i++)
+	{
+		cout << "Number " << i + 1 << ": ";
+		cin >> myInt;
+
+		integers.push_back(myInt);  //append the integer to integer vector
+	}	
+	
+	// Process and output results
+	cout << "The total of the 3 integers is " << accum(integers) << endl << endl;
+	
+	// Get numeric types from the user
+	vector <double> doubles{};  //empty vector of doubles
+	double myDouble;  //a double to be input by user
+
+	cout << "Enter 3 doubles:" << endl;
+
+	for (size_t j = 0; j < 3; j++)
+	{
+		cout << "Number " << j + 1 << ": ";
+		cin >> myDouble;
+
+		doubles.push_back(myDouble);  //append the double to the double vector
+	}
+
+	// Process and output results
+	cout << "The total of the 3 doubles is " << accum(doubles) << endl << endl;
+	
+
+	// Get string inputs from user
+	vector <string> strings{};  //empty vector of strings
+	string myString;   //string to be input by user
+
+	cout << "Enter 3 strings:" << endl;
+
+	for (size_t k = 0; k < 3; k++)
+	{
+		cout << "String " << k + 1 << ": ";
+		if (k == 0)
+			cin.ignore(); //clear newline character for input
+		getline(cin, myString);   //get string, including spaces
+
+		strings.push_back(myString);  //append the string to string vector
+	}
+		
+	// Process and output results
+	cout << "The concatenation of the 3 strings is " << accum(strings) << endl << endl;
+
+	return 0;	
+}
