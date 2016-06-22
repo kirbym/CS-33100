@@ -1,0 +1,41 @@
+
+// CS331, HW4, PartII, Q3
+// This program reads data from a file and saves to a vector using copy algorithm. 
+// Students need to complete this program. 
+
+#include <iostream>
+#include <iomanip>
+#include <fstream>
+#include <array>
+#include <algorithm>
+#include <iterator>
+#include <vector>
+using namespace std;
+
+int main()
+{
+	ifstream inputFile("integers.txt", ios::in);  //open "integers.txt" file for input
+	//"integers.txt" file has a list of integers separated by a space
+
+	if (!inputFile) //check that the file was opened properly
+	{
+		cerr << "File could not be opened." << endl;
+		exit(EXIT_FAILURE);
+	}
+
+	vector <int> integers;  //vector of intergers to read data into
+
+	//use copy algorithm and iterator to read the list of integers; use back_inserter to append the integers to the end of the (empty) vector
+	copy(istream_iterator<int>(inputFile), istream_iterator<int>(), back_inserter(integers));
+
+	cout << "The vector contains: ";
+	//use an iterator to print out the numbers in the integers vector
+	for (auto iterator = integers.begin(); iterator != integers.end(); ++iterator)
+	{
+		cout << *iterator << " ";
+	}
+
+	cout << endl;
+
+	return 0;
+}
