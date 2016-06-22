@@ -1,0 +1,89 @@
+// CS331, HW4, PartII, Q1
+// This program evaluates postfix expressions.
+// Students need to complete postfixExpr() function. 
+ 
+#include <stdlib.h>
+#include <string>
+#include <iostream>
+#include <sstream>
+#include <stack>
+
+using namespace std;
+
+int postfixExpr(istream & inputStream);
+
+
+int main()
+{
+    string input;
+    cout << "Enter a postfix expression to convert to infix, \nor a blank line to "
+         << "quit the program:";
+    getline(cin, input);
+    while (input.size() != 0)
+    {
+        istringstream inputExpr(input);   // Convert string to a string stream
+		cout << "The value of the expression is " << postfixExpr(inputExpr) << endl;
+        cout << "Enter a postfix expression to evaluate: ";
+        getline(cin, input);
+    }
+    return 0;
+}
+
+//***************************************************************
+// Takes an istream that contains a single postfix expression p *
+// and returns the value of the expression                      *
+//***************************************************************
+int postfixExpr(istream & in)
+{
+	stack <int> stack;  //stack to hold numbers in postfix expression
+	int number1;  //when an operator is chosen, the first number on the stack
+	int number2;  //when an operator is chosen, the second number on the stack
+	string expression;   //the input postfix expression
+	string oper;  //substring that contains operand/operator
+	int findSpace;  //position of the next space in the postfix expression
+	int index = 0;  //position of character within the postfix expression
+	
+	getline(in, expression);  //get the input postfix expression and assign to variable expression
+
+	while (index < expression.size())
+	{
+		findSpace = expression.find(' ', index);  //find the next space in the expression starting at location=index
+
+		if (findSpace == string::npos)  //if a space is not found (i.e. the end of the postfix expresssion)
+			findSpace = index + 1;  //make findSpace the value of 1 more than the position of final character in the string
+
+		oper = expression.substr(index, findSpace - index); //substring of the operator/operand (position=index, length=findSpace-index)
+
+		if ((oper == "+") || (oper == "*") || (oper == "/") || (oper == "-"))  //if the substring is an operator, perform chosen operation
+		{
+			number1 = stack.top();  //assign the top number of stack to number1
+			stack.pop();  //pull off top value from stack
+			number2 = stack.top();  //assign the new top number of stack to number2
+			stack.pop();  //pull off top value from stack
+
+			if (oper == "+")    //perform addition with two numbers
+				stack.push(number2 + number1);
+			else if (oper == "-")  //perform subtraction with two numbers
+				stack.push(number2 - number1);
+			else if (oper == "*")  //perform multiplication with two numbers
+				stack.push(number2 * number1);
+			else    //perform division with two numbers
+			{
+				if (number1 != 0)  //do not divide by zero
+					stack.push(number2 / number1);
+				else  //if user tries to divide by zero, do not perform any operation and return numbers back to stack
+				{
+					stack.push(number2);
+					stack.push(number1);
+				}
+			}
+
+		}
+		else   //if the substring is an operand, push the number on to the stack
+			stack.push(stoi(oper));
+
+		index = findSpace + 1;  //move index to search for next operator/operand
+	}
+
+	return stack.top();  //return the final answer after evaluating the postfix expression
+}
