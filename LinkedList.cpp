@@ -65,14 +65,11 @@ void LinkedList<Type>::insert(const Type &item, int i)   //insert a ListElement
 				cursor->next = temp;   //point the new element back to element(s) after it
 			}
 		}
-		else if (i == -1)   //inserting element before the cursor  (wasn't tested)
+		else if (i == -1)   //inserting element before the cursor
 		{
 			temp = cursor;   //current position
 			cursor = new ListElement (item, nullptr);   //create new element
-			//cursor = &newItem;
-			cursor->next = temp;
-			//gotoPrior();    //move cursor to previous element
-			//cursor->next = &newItem;   //point previous element to new element
+			cursor->next = temp;   //point new element to previous cursor element
 		}
 	}
 }
